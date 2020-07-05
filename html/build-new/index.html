@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+
+  <!--  <meta property="og:title" content="">-->
+  <!--  <meta property="og:type" content="">-->
+  <!--  <meta property="og:image" content="">-->
+  <!--  <meta property="og:url" content="">-->
+  <!--  <meta property="og:description" content="">-->
+  <!--  <meta property="og:site_name" content="">-->
+
+  <!--  <link rel="shortcut icon" sizes="32x32" href="/assets/images/favicon/favicon.ico" type="image/x-icon">-->
+  <!--  <link rel="apple-touch-icon" href="/assets/images/favicon/apple-touch-icon.png">-->
+
+  <title>Build Template</title>
+
+  <style>
+    #loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+    }
+
+    #loader {
+      display: block;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      width: 150px;
+      height: 150px;
+      margin: -75px 0 0 -75px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #3498db;
+      -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    }
+
+    #loader:before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #e74c3c;
+      -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    }
+
+    #loader:after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #f9c922;
+      -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+      animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+    }
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg); /* IE 9 */
+        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+      }
+      100% {
+        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg); /* IE 9 */
+        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg); /* IE 9 */
+        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+      }
+      100% {
+        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg); /* IE 9 */
+        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+      }
+    }
+  </style>
+
+  <style>
+    :root {
+      --transition-fn: 350ms ease;
+      --font-color: #31456A;
+      --html-bg: #C3D1E4;
+      --page-bg: linear-gradient(318.32deg, #C3D1E4 -0.02%, #DDE7F3 54.14%, #D4E0ED 100.43%);
+      --header-bg: 227, 237, 247;
+      --header-shadow: 0 0 0 rgba(119, 142, 165, 0.18);
+      --header-shadow-hover: 8px 12px 32px rgba(119, 142, 165, 0.18);
+      --main-link-bg: linear-gradient(110.6deg, #EBF2F9 19.14%, #C6D7EB 154.68%);
+      --main-link-shadow: 8px 2px 32px rgba(18, 61, 101, 0.3), -8px -8px 20px rgba(255, 255, 255, 0.8), inset -4px -3px 20px rgba(255, 255, 255, 0.18);
+      --main-link-shadow-hover: 16px 4px 64px rgba(18, 61, 101, 0.3), -16px -16px 40px rgba(255, 255, 255, 0.8), inset -8px -6px 80px rgba(255, 255, 255, 0.18);
+    }
+
+    *, *::after, *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background-color: var(--html-bg);
+    }
+
+    body {
+      font-family: -apple-system,
+      'BlickMacSystemFont',
+      'Segoe UI',
+      'Roboto',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      sans-serif;
+      font-size: 14px;
+      color: var(--font-color);
+      letter-spacing: 0.02em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a, button {
+      display: block;
+      outline: none;
+      border: none;
+    }
+
+    .page {
+      background: var(--page-bg);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page__inner {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100%;
+      height: 100%;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      width: 100%;
+      min-height: 50px;
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 1.5;
+      background-color: transparent;
+      box-shadow: var(--header-shadow);
+      transition: all var(--transition-fn);
+    }
+
+    .header.fixed {
+      background-color: rgba(var(--header-bg), 0.7);
+      backdrop-filter: blur(25px);
+      box-shadow: var(--header-shadow-hover);
+    }
+
+    .header .container {
+      display: grid;
+      grid-template-areas: 'title block ...';
+      grid-template-columns: 1fr auto 1fr;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .header__title, .header__hover-block {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.5;
+    }
+
+    .header__title {
+      grid-area: title;
+      font-weight: 700;
+    }
+
+    .header__hover-block {
+      grid-area: block;
+      text-align: center;
+      font-weight: 400;
+    }
+
+    .container {
+      max-width: 1600px;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+
+    .main {
+      flex: 1 1 100%;
+      padding: 100px 0 50px;
+    }
+
+    .main__list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      list-style-type: none;
+    }
+
+    .main__title {
+      display: block;
+      margin-bottom: 15px;
+      width: 100%;
+      color: rgba(var(--font-color), 0.8);
+      font-weight: 700;
+      font-size: 26px;
+      line-height: normal;
+      text-align: left;
+      text-decoration: none;
+      border-radius: 24px;
+      transition: all var(--transition-fn);
+    }
+
+    .main__link {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 15px 35px 86%;
+      color: rgba(var(--font-color), 0.8);
+      font-weight: 700;
+      font-size: 26px;
+      line-height: normal;
+      text-align: left;
+      text-decoration: none;
+      background: var(--main-link-bg);
+      box-shadow: var(--main-link-shadow);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 350ms linear;
+    }
+
+    .main__image {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -23px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 24px;
+      transition: all var(--transition-fn);
+      transform: scale(0.797, 0.772);
+    }
+
+    .main__link:hover,
+    .main__link:focus {
+      box-shadow: var(--main-link-shadow-hover);
+    }
+
+    .main__link:hover .main__image,
+    .main__link:focus .main__image {
+      bottom: 0;
+      transform: scale(1, 1);
+    }
+
+    .main__link:hover .main__title,
+    .main__link:focus .main__title {
+      opacity: 0;
+    }
+
+    .footer {
+      margin-bottom: 20px;
+    }
+
+    .footer .container {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .footer__credits {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .js-build-date {
+      font-weight: 600;
+    }
+
+    @media screen and (max-width: 767px) {
+      .container {
+        max-width: 100vw;
+      }
+
+      .header .container {
+        grid-template-areas: 'title' 'block';
+        grid-template-columns: 1fr;
+      }
+
+      .header__hover-block {
+        display: none;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --font-color: #FDFDFD;
+        --html-bg: #1C1F22;
+        --header-bg: 28, 31, 34;
+        --header-shadow: 0 0 0 rgba(19, 20, 25, 0.18);
+        --header-shadow-hover: 4px 6px 16px rgba(19, 20, 25, 0.18);
+        --page-bg: linear-gradient(0deg, #1C1F22, #1C1F22), linear-gradient(135.39deg, #353C44 -0.7%, #131419 100%);
+        --main-link-bg: linear-gradient(0.14deg, #26282C 0.35%, #35373B 192.77%);;
+        --main-link-shadow: 4px 4px 17px #1F2427;
+        --main-link-shadow-hover: inset 0px 2px 6px rgba(17, 17, 18, 0.1), inset 4px 2px 6px rgba(17, 17, 18, 0.1), inset -6px -3px 6px rgba(17, 17, 18, 0.1);
+      }
+    }
+  </style>
+
+</head>
+<body class="page">
+<div id="loader-wrapper">
+  <div id="loader"></div>
+</div>
+
+<div class="page__inner">
+  <header class="header js-header">
+    <div class="container">
+      <h1 class="header__title">Build template</h1>
+      <span class="header__hover-block js-hover-block"></span>
+    </div>
+  </header>
+  <main class="main">
+    <ul class="main__list container">
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Home" aria-label="Link to internal page.">
+            <h2 class="main__title">Home</h2>
+
+            <img class="main__image" src="../../images/01_home.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Fashion" aria-label="Link to internal page.">
+            <h2 class="main__title">Fashion</h2>
+            <img class="main__image" src="../../images/02_fashion.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Video" aria-label="Link to internal page.">
+            <h2 class="main__title">Video</h2>
+            <img class="main__image" src="../../images/03_video.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Culture" aria-label="Link to internal page.">
+            <h2 class="main__title">Culture</h2>
+            <img class="main__image" src="../../images/04_culture.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Art" aria-label="Link to internal page.">
+            <h2 class="main__title">Art</h2>
+            <img class="main__image" src="../../images/05_art.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Photogallery" aria-label="Link to internal page.">
+            <h2 class="main__title">Photogallery</h2>
+            <img class="main__image" src="../../images/06_photogallery.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Preview" aria-label="Link to internal page.">
+            <h2 class="main__title">Preview</h2>
+            <img class="main__image" src="../../images/07_preview.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Event" aria-label="Link to internal page.">
+            <h2 class="main__title">Event</h2>
+            <img class="main__image" src="../../images/08_event.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Search" aria-label="Link to internal page.">
+            <h2 class="main__title">Search</h2>
+            <img class="main__image" src="../../images/09_search.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Contributors" aria-label="Link to internal page.">
+            <h2 class="main__title">Contributors</h2>
+            <img class="main__image" src="../../images/10_contributors.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Contacts" aria-label="Link to internal page.">
+            <h2 class="main__title">Contacts</h2>
+            <img class="main__image" src="../../images/11_contacts.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+      <li class="main__item">
+        <article class="main__article">
+          <a class="main__link js-hover-item"
+             href="#" title="Privacy Policy" aria-label="Link to internal page.">
+            <h2 class="main__title">Privacy Policy</h2>
+            <img class="main__image" src="../../images/12_privacy-policy.png" alt="Preview image." loading="lazy">
+          </a>
+        </article>
+      </li>
+    </ul>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <span class="footer__credits">Build date: <span class="js-build-date">{{buildDate}}</span></span>
+    </div>
+  </footer>
+</div>
+
+<script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('loader-wrapper').style.display = 'none';
+        const hoverItems = document.querySelectorAll('.js-hover-item');
+        const hoverBlock = document.querySelector('.js-hover-block');
+        const header = document.querySelector('.js-header');
+        const buildDate = document.querySelector('.js-build-date');
+
+        hoverItems.forEach(item => {
+            item.addEventListener('mouseenter', () => hoverBlock.textContent = item.title, true);
+            item.addEventListener('mouseout', () => hoverBlock.textContent = ``);
+        });
+
+        document.addEventListener('scroll', () => {
+            window.pageYOffset > 0 ? header.classList.add('fixed') : header.classList.remove('fixed');
+        });
+        const date = new Date();
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timezone: 'UTC',
+            hour: 'numeric',
+            minute: 'numeric',
+        };
+        buildDate.textContent = `${date.toLocaleString('ru', options)}`;
+    });
+</script>
+
+</body>
+</html>
