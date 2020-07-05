@@ -1,2 +1,2 @@
-https://ereburg.github.io/redesign/build-new/
-https://ereburg.github.io/redesign/build-prev/
+- https://ereburg.github.io/redesign/html/build-new/
+- https://ereburg.github.io/redesign/html/build-prev/
