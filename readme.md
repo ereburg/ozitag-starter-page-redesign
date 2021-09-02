@@ -1,2 +1,2 @@
-- https://ereburg.github.io/redesign/html/build-new/
-- https://ereburg.github.io/redesign/html/build-prev/
+- https://ereburg.github.io/ozitag-starter-page-redesign/html/build-new/
+- https://ereburg.github.io/ozitag-starter-page-redesign/html/build-prev/
